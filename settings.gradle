@@ -1,0 +1,27 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        flatDir { dirs 'libs' }
+        String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
+        repositories {
+            maven {
+                url '/Users/coeus/AndroidStudioProjects/androidLibraryIntegration/intergate_arr/repo'
+            }
+            maven {
+                url "$storageUrl/download.flutter.io"
+            }
+        }
+    }
+}
+rootProject.name = "androidLibraryIntegration"
+include ':app'
+include ':intergate_arr'
