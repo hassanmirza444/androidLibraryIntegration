@@ -14,7 +14,7 @@ dependencyResolutionManagement {
         String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
         repositories {
             maven {
-                url '/Users/coeus/AndroidStudioProjects/androidLibraryIntegration/intergate_arr/repo'
+                url 'app/repo'
             }
             maven {
                 url "$storageUrl/download.flutter.io"
@@ -24,4 +24,23 @@ dependencyResolutionManagement {
 }
 rootProject.name = "androidLibraryIntegration"
 include ':app'
-include ':intergate_arr'
+
+
+
+/*
+gpg --keyserver http://keyserver.ubuntu.com:11371 --send-keys d282471ef6e1b316
+gpg --keyserver https://keys.openpgp.org --send-keys d282471ef6e1b316
+gpg --keyserver http://pgp.mit.edu:11371 --send-keys d282471ef6e1b316
+gpg --keyserver http://keyserver.ubuntu.com:11371 --send-keys d282471ef6e1b316
+gpg --keyserver https://keys.openpgp.org --send-keys d282471ef6e1b316
+gpg --keyserver http://pgp.mit.edu:11371 --send-keys d282471ef6e1b316
+gpg --keyserver http://keyserver.ubuntu.com:11371 --send-keys d282471ef6e1b316
+gpg --keyserver https://keys.openpgp.org --send-keys d282471ef6e1b316
+gpg --keyserver http://pgp.mit.edu:11371 --send-keys d282471ef6e1b316
+gpg --keyserver http://keyserver.ubuntu.com:11371 --send-keys d282471ef6e1b316
+gpg --keyserver https://keys.openpgp.org --send-keys d282471ef6e1b316
+gpg --keyserver http://pgp.mit.edu:11371 --send-keys d282471ef6e1b316
+gpg --keyserver http://keyserver.ubuntu.com:11371 --send-keys d282471ef6e1b316
+gpg --keyserver https://keys.openpgp.org --send-keys d282471ef6e1b316
+gpg --keyserver http://pgp.mit.edu:11371 --send-keys d282471ef6e1b316*/
+include ':app_module'

@@ -1,0 +1,169 @@
+import com.vanniktech.maven.publish.SonatypeHost
+buildscript {
+    repositories {
+        google()
+        mavenCentral() // NEW
+    }
+    dependencies {
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.10.0' // NEW
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.10.2' // NEW
+    }
+}
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id("com.vanniktech.maven.publish") version "0.25.3"
+    id 'maven-publish'
+}
+afterEvaluate { project ->
+    mavenPublishing {
+        //publishToMavenCentral(SonatypeHost.DEFAULT)
+        publishToMavenCentral(SonatypeHost.S01)
+        signAllPublications()
+    }
+    mavenPublishing {
+        // coordinates("com.example.integrate_arr", "integrate_arr-runtime", "1.0.3-SNAPSHOT")
+
+        pom {
+            name.set("Intergrate_arr")
+            description.set("A library that had integrated with flutter aar files.")
+            inceptionYear.set("2023")
+            url.set("https://github.com/hassanmirza444/androidLibraryIntegration")
+            licenses {
+                license {
+                    name.set("The Apache License, Version 2.0")
+                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                }
+            }
+            developers {
+                developer {
+                    id.set("hassanmirza444")
+                    name.set("Hssn Mirza")
+                    url.set("https://github.com/hassanmirza444/")
+                }
+            }
+            scm {
+                url.set("https://github.com/hassanmirza444/androidLibraryIntegration/")
+                connection.set("scm:git:git://github.com/hassanmirza444/androidLibraryIntegration.git")
+                developerConnection.set("scm:git:ssh://git@github.com:hassanmirza444/androidLibraryIntegration.git")
+            }
+        }
+    }
+
+}
+
+def ossrhUsername='hssnmirza'
+def ossrhPassword='3fPjcK8tG7!pT%h'
+/*uploadArchives {
+    repositories {
+        mavenDeployer {
+          ///  beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Example Application'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'A application used as an example on how to set up pushing  its components to the Central Repository.'
+                url 'http://www.example.com/example-application'
+
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("hassanmirza")
+                        name.set("Hssn Mirza")
+                        url.set("https://github.com/hassanmirza444/")
+                    }
+                }
+                scm {
+                    url.set("https://github.com/hassanmirza444/androidLibraryIntegration/")
+                    connection.set("scm:git:git://github.com/hassanmirza444/androidLibraryIntegration.git")
+                    developerConnection.set("scm:git:ssh://git@github.com:hassanmirza444/androidLibraryIntegration.git")
+                }
+            }
+        }
+    }
+}*/
+
+/*allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
+        repositories {
+            maven {
+                url 'repo'
+            }
+            maven {
+                url "$storageUrl/download.flutter.io"
+            }
+        }
+    }
+
+}*/
+
+
+android {
+    namespace 'com.example.integrate_arr'
+    compileSdk 33
+    defaultConfig {
+        //applicationId "com.example.integrate_arr"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        profile {
+            initWith release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+
+
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    debugImplementation 'com.example.module_test:flutter_debug:1.0'
+    profileImplementation 'com.example.module_test:flutter_profile:1.0'
+    releaseImplementation 'com.example.module_test:flutter_release:1.0'
+
+
+}
